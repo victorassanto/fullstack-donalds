@@ -8,10 +8,11 @@ import { formatCurrency } from "@/helpers/format-currency";
 import { CartContext, CartProduct } from "../contexts/cart";
 
 interface CartItemProps {
+    product : CartProduct;
 }
 
 const CartProductItem = ({ product }: CartItemProps) => {
- 
+    const { decreaseProductQuantity } =    useContext(CartContext);
   return (
     <div className="flex items-center justify-between">
       {/* ESQUERDA */}
@@ -29,7 +30,10 @@ const CartProductItem = ({ product }: CartItemProps) => {
           {/* QUANTIDADE */}
           <div className="flex items-center gap-1 text-center">
             <Button
-              className="h-7 w-7 rounded-lg" variant="outline">
+              className="h-7 w-7 rounded-lg" 
+              variant="outline"         
+              onClick={() => decreaseProductQuantity(product.id)}
+            >
               <ChevronLeftIcon />
             </Button>
             <p className="w-7 text-xs">{product.quantity}</p>
